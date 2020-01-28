@@ -1,0 +1,18 @@
+version: "3"
+
+services:
+  postgres:
+    image: wodby/postgres
+    environment:
+      POSTGRES_PASSWORD: adminer
+      POSTGRES_DB: adminer
+      POSTGRES_USER: adminer
+
+  pqadminer:
+    image: dpage/pgadmin4
+    depends_on:
+      - postgres
+    environment:
+      PGADMIN_DEFAULT_EMAIL: beiermax@awm.de
+      PGADMIN_DEFAULT_PASSWORD: xmaster13
+      SERVER_PORT: 5050
