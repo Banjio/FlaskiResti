@@ -2,8 +2,8 @@ version: '3.5'
 
 services:
   postgres:
-    container_name: timescaledb_contrainer
-    image: timescale/timescaledb:latest-pg11
+    container_name: postgres_container
+    image: postgres
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-postgres}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-max123}

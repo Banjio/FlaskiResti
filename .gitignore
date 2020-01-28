@@ -114,5 +114,7 @@ venv.bak/
 */catboost_info/
 *.tmp
 
+# Own repos
 # results
 results/
+data/
