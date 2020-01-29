@@ -7,11 +7,11 @@ class BucketList(db.Model):
 
     __tablename__ = 'bucketlists'
 
-    id = db.Columns(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255))
     date_created = db.Column(db.DateTime, default=db.func.current_timestamp())
     date_modified = db.Column(
-        db.Datetime, default=db.func.current_timestamp(),
+        db.DateTime, default=db.func.current_timestamp(),
         onupdate=db.func.current_timestamp()
     )
 
