@@ -1,5 +1,5 @@
-import dotenv
-dotenv.load_dotenv(verbose=True)
+#import dotenv
+#dotenv.load_dotenv(verbose=True)
 import os
 from flask_script import Manager
 from flask_migrate import Migrate, MigrateCommand
