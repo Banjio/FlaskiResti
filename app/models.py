@@ -41,6 +41,7 @@ class BucketList(db.Model):
             'date_modified': self.date_modified}
 
 class GameSales(db.Model):
+
     __tablename__ = 'game_sales'
     name = db.Column(db.String(255), primary_key=True)
     platform = db.Column(db.String(255), primary_key=True)
