@@ -33,6 +33,13 @@ class BucketList(db.Model):
         db.session.delete(self)
         db.session.commit()
 
+    def get_dict_repr(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'date_created': self.date_created,
+            'date_modified': self.date_modified}
+
 class GameSales(db.Model):
     __tablename__ = 'game_sales'
     name = db.Column(db.String(255), primary_key=True)

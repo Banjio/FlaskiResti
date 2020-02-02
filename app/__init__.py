@@ -26,25 +26,19 @@ def create_app(config_name):
             if name:
                 bucketlist = BucketList(name=name)
                 bucketlist.save()
-                response = jsonify({
-                    'id': bucketlist.id,
-                    'name': bucketlist.name,
-                    'date_created': bucketlist.date_created,
-                    'date_modified': bucketlist.date_modified
-                })
+                response = jsonify(bucketlist.get_dict_repr())
                 response.status_code = 201
                 return response
         else:
             # GET
             bucketlists = BucketList.get_all()
-            results = list(map(lambda bucket: dict(id=bucket.id, name=bucket.name, date_created=bucket.date_created,
-                                                   date_modified=bucket.date_modified), bucketlists))
+            results = list(map(lambda bucket: bucket.get_dict_repr(), bucketlists))
             response = jsonify(results)
             response.status_code = 200
             return response
 
-    @app.route('/bucketlists/<int:id>', methods=['GET','PUT', 'DELETE'])
-    def bucketlist_manipulation(id, **kwargs):
+    @app.route('/bucketlists/<int:id>', methods=['GET', 'PUT', 'DELETE'])
+    def bucketlist_manipulation(id, change_field_value=""):
         #retrieve a bucketlis using it's ID
         bucketlist = BucketList.query.filter_by(id=id).first()
         if not bucketlist:
@@ -56,24 +50,14 @@ def create_app(config_name):
             return {"message": f"bucketlist {bucketlist.id} deleted succesfully"}
 
         elif request.method == 'PUT':
-            name = str(request.data.get('name', ''))
+            name = str(request.data.get('name', change_field_value))
             bucketlist.name = name
             bucketlist.save()
-            response = jsonify({
-                'id': bucketlist.id,
-                'name': bucketlist.name,
-                'date_created': bucketlist.date_created,
-                'date_modified': bucketlist.date_modified
-            })
+            response = jsonify(bucketlist.get_dict_repr())
             response.status_code = 200
             return response
         else:
-            response = jsonify({
-                'id': bucketlist.id,
-                'name': bucketlist.name,
-                'date_created': bucketlist.date_created,
-                'date_modified': bucketlist.date_modified
-            })
+            response = jsonify(bucketlist.get_dict_repr())
             response.status_code = 200
             return response
 
