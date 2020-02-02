@@ -58,8 +58,14 @@ class GameSales(db.Model):
     def __repr__(self):
         return 'GameSales %r' % self.name
 
-    def __init__(self, name):
+    def __init__(self, name, platform, rank, year, genre, publisher, global_sales):
         self.name = name
+        self.platform = platform
+        self.rank = rank
+        self.year = year
+        self.genre = genre
+        self.publisher = publisher
+        self.global_sales = global_sales
 
     def save(self):
         db.session.add(self)
@@ -67,8 +73,23 @@ class GameSales(db.Model):
 
     @staticmethod
     def get_all():
-        return BucketList.query.all()
+        return GameSales.query.all()
 
     def delete(self):
         db.session.delete(self)
         db.session.commit()
+
+    def custom_guery(self, query):
+        return self.query()
+
+    def get_dict_repr(self):
+        return {
+            'rank': self.rank,
+            'name': self.name,
+            'platform': self.platform,
+            'year': self.year,
+            'publisher': self.publisher,
+            'genre': self.genre,
+            'global_sales': self.global_sales,
+            'date_created': self.date_created,
+            'date_modified': self.date_modified}
