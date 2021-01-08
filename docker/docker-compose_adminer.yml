@@ -14,5 +14,5 @@ services:
       - postgres
     environment:
       PGADMIN_DEFAULT_EMAIL: beiermax@awm.de
-      PGADMIN_DEFAULT_PASSWORD: xmaster13
+      PGADMIN_DEFAULT_PASSWORD: max123
       SERVER_PORT: 5050
